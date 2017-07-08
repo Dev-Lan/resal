@@ -1,0 +1,9 @@
+#version 410
+
+in vec3 f_vert;
+
+out vec4 f_color;
+
+void main(void) {
+	f_color = vec4(.92,0.94,.8,1);
+}

@@ -1,0 +1,13 @@
+#version 410
+//	this shader takes in 2D normalized screen coordinates and passes them to the pixel shader.
+//	The pixel shader will display the textured rects on screen
+
+in vec2 vert;
+in vec2 texCoord;
+
+out vec2 f_texCoord;
+
+void main(void) {
+	gl_Position = vec4(vert.x, vert.y, 1, 1);
+	f_texCoord = texCoord;
+}

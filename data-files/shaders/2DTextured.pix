@@ -1,0 +1,19 @@
+#version 410
+// this shader renders a textured polygon
+
+in vec2 f_texCoord;
+
+uniform sampler2D tex;
+uniform sampler2D spectrumTex;
+uniform vec3 allLaserColor;
+
+
+out vec4 fragColor;
+
+void main(void) {
+	vec4 c = texture(tex, f_texCoord);
+	c.r *= allLaserColor.r;
+	c.g *= allLaserColor.g;
+	c.b *= allLaserColor.b;
+	fragColor = c;
+}

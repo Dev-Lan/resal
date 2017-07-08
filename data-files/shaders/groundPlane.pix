@@ -1,0 +1,124 @@
+#version 410
+
+in vec3 f_vert;
+in vec3 f_planeNorm;
+in vec2 f_texCoord;
+
+out vec4 f_color;
+
+// struct LaserPoint {
+// 	vec2 position;
+// 	vec3 color;
+// 	float intensity;
+// }
+
+uniform sampler2D tex;
+uniform sampler2D nrm;
+
+// #define NUM_LASER_POINTS 2
+// #define LASER_HEIGHT 0.6
+uniform vec2 laserLightsPos[NUM_LASER_POINTS];
+uniform vec3 laserLightsCol[NUM_LASER_POINTS];
+uniform float laserLightsIntensity[NUM_LASER_POINTS];
+uniform int numberOfLaserSegments;
+
+// uniform vec3 lightPos1;
+// uniform vec3 lightPos2;
+
+// uniform vec2 + vec3 + float
+
+// uniform vec3 lightColor;
+
+uniform vec3 camPos;
+
+uniform vec3 K_A;
+uniform vec3 K_D;
+uniform vec3 K_S;
+uniform float alpha;
+
+uniform bool useNormalMap;
+uniform bool useTextureMap;
+
+uniform bool useSpecular;
+uniform bool useDiffuse;
+uniform bool useAmbient;
+
+vec3 getClosestPointOnALineSegment(vec3 A, vec3 B, vec3 P);
+
+vec3 getClosestPointOnALineSegment(vec3 A, vec3 B, vec3 P) {
+	vec2 line  = B.xy - A.xy;
+	vec2 fromP = P.xy - A.xy;
+	float lineDistanceSquared = dot(line, line);
+	if (lineDistanceSquared == 0) {
+		return A;
+	}
+	float t = dot(fromP, line) / lineDistanceSquared;
+	// option one
+	if (t < 0.0) {
+		return A;
+	} else if (t > 1.0) {
+		return B;
+	} else {
+		return A + t * (B - A);
+	}
+	// option two
+	// return vec3(A + clamp(t, 0.0, 1.0)*line, t);
+}
+
+void main(void) {
+	vec3 intensity = vec3(0,0,0);
+	vec4 finalColor = vec4(0,0,0,0);
+	// ambient
+	if (useAmbient) {
+		finalColor.rgb = K_A;
+		
+		if (useTextureMap) {
+		 	finalColor.rgb += texture(tex, f_texCoord).rbg * K_A;
+		} else {
+			finalColor.rgb += vec3(1,1,1) * K_A;
+		}
+	}
+	vec3 texNorm = texture(nrm, f_texCoord).rgb;
+	texNorm = (texNorm - vec3(.5,.5,.5) ) * 2;
+
+	for (int i=0; i < numberOfLaserSegments; i++) {
+		// diffuse
+			vec3 N;
+			if (useNormalMap) {
+				N = normalize(texNorm);
+			} else {
+				N = normalize(f_planeNorm);
+			}
+			vec3 lightPos1 = vec3(laserLightsPos[2*i], laserLightsIntensity[2*i]);
+			vec3 lightPos2 = vec3(laserLightsPos[2*i + 1], laserLightsIntensity[2*i + 1]);
+
+			vec3 nearestLightPos = getClosestPointOnALineSegment(lightPos1, lightPos2, f_vert);
+			float lightIntensity = nearestLightPos.z;
+			nearestLightPos.z = LASER_HEIGHT;
+			// http://stackoverflow.com/questions/849211/shortest-distance-between-a-point-and-a-line-segment
+			vec3 toLight = nearestLightPos - f_vert;
+			vec3 L = normalize(toLight);
+			float D = length(toLight);
+			float NdotL = clamp(dot(N,L), 0.0, 1.0);
+
+			vec3 lightColor = laserLightsCol[2*i];
+		if (useDiffuse) {
+			intensity = clamp(lightIntensity * (K_D * NdotL * lightColor / D), 0.0, 1.0);
+
+			if (useTextureMap) {
+			 	finalColor.rgb += texture(tex, f_texCoord).rbg * intensity;
+			} else {
+				finalColor.rgb += vec3(1,1,1) * intensity;
+			}
+		}
+		// specular
+		if (useSpecular) {
+			vec3 V = normalize(camPos - f_vert);
+			vec3 R = normalize( 2*dot(N,L) * N - L );
+
+			intensity = clamp(lightIntensity * K_S * pow( clamp(dot(R, V), 0, 1) , alpha) * lightColor, 0, 1);
+			finalColor.rgb += intensity / D;
+		}
+	}
+	f_color = finalColor;
+}

@@ -1,0 +1,28 @@
+<Scene>
+	<Dollies>
+		<Dolly x1="-35" y1="14" x2="-35" y2="-14" rotation="0" trackSlider="0.5" rotationMin="-0.1" rotationMax="0.03" translationLocked=""/>
+		<Dolly x1="-15" y1="-2" x2="35" y2="-2" rotation="-0.1" trackSlider="0.8" rotationMin="-.25" rotationMax="2.6" translationLocked=""/>
+		<Dolly x1="5" y1="20" x2="5" y2="20" rotation="0" trackSlider="0.5" rotationMin="0" rotationMax="0" rotationLocked="" translationLocked=""/>
+	</Dollies>
+
+	<Emitters>
+		<Emitter dolly="0" wavelength="550" intensity="1" x="0" y="0" vx="1" vy="0"/>
+	</Emitters>
+
+	<Interactors>
+		<FlatMirror dolly="1">
+			<LineSegment x1="-.3" y1="14" x2="-.3" y2="-14" />
+			<LineSegment x1=".3" y1="14" x2=".3" y2="-14" />
+		</FlatMirror>
+		<Wall dolly="1">
+			<LineSegment x1="-.3" y1="14" x2=".3" y2="14" />
+			<LineSegment x1="-.3" y1="-14" x2=".3" y2="-14" />
+		</Wall>
+	</Interactors>
+
+	<Receivers>
+		<Receiver dolly="2" radius="5">
+			<PowerReq wavelength="550" intensity="0.0"/>
+		</Receiver>
+	</Receivers>
+</Scene>

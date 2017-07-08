@@ -1,0 +1,11 @@
+#version 410
+
+in vec4 vert;
+in vec2 texCoord;
+
+out vec2 frag_texCoord;
+
+void main(void) {
+	gl_Position = g3d_ObjectToScreenMatrix * vert;
+	frag_texCoord = texCoord;
+}

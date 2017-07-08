@@ -1,0 +1,13 @@
+#version 410
+// this shader renders a textured polygon this is clipped to a rect.
+
+in vec2 f_texCoord;
+
+uniform sampler2D tex;
+
+out vec4 fragColor;
+
+void main(void) {
+	vec4 c = texture(tex, f_texCoord);
+	fragColor = c;
+}

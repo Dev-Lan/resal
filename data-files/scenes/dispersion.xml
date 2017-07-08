@@ -1,0 +1,71 @@
+<Scene>
+	<Dollies>
+		<Dolly x1="-42" y1="30" x2="-42" y2="-30" rotation="0" trackSlider="0.5" rotationMin="0" rotationMax="0" translationLocked="" rotationLocked="" />
+
+		<Dolly x1="40" y1="8" x2="40" y2="-10" rotation="0" trackSlider="0.0" rotationMin="0" rotationMax="0" translationLocked="" rotationLocked=""/>
+		<Dolly x1="40" y1="8" x2="40" y2="-10" rotation="0" trackSlider="0.142" rotationMin="0.0" rotationMax="0" translationLocked="" rotationLocked=""/>
+		<Dolly x1="40" y1="8" x2="40" y2="-10" rotation="0" trackSlider="0.285" rotationMin="0.0" rotationMax="0" translationLocked="" rotationLocked=""/>
+		<Dolly x1="40" y1="8" x2="40" y2="-10" rotation="0" trackSlider="0.428" rotationMin="0.0" rotationMax="0" translationLocked="" rotationLocked=""/>
+		<Dolly x1="40" y1="8" x2="40" y2="-10" rotation="0" trackSlider="0.571" rotationMin="0.0" rotationMax="0" translationLocked="" rotationLocked=""/>
+		<Dolly x1="40" y1="8" x2="40" y2="-10" rotation="0" trackSlider="0.714" rotationMin="0.0" rotationMax="0" translationLocked="" rotationLocked=""/>
+		<Dolly x1="40" y1="8" x2="40" y2="-10" rotation="0" trackSlider="0.857" rotationMin="0.0" rotationMax="0" translationLocked="" rotationLocked=""/>
+
+
+		<Dolly x1="-35" y1="0" x2="-10" y2="0" rotation="0" trackSlider="0.5" rotationMin="0" rotationMax="0" />
+		<Dolly x1="10" y1="0" x2="26" y2="0" rotation="0" trackSlider="0.5" rotationMin="0" rotationMax="0" />
+		<Dolly x1="0" y1="-20" x2="0" y2="20" rotation="0" trackSlider="0.5" rotationMin="0" rotationMax="0" />
+	</Dollies>
+
+	<Emitters>
+		<Emitter dolly="0" wavelength="400" intensity="1" x="0" y="0" vx="1" vy="0"/>
+		<Emitter dolly="0" wavelength="450" intensity="1" x="0" y="0" vx="1" vy="0"/>
+		<Emitter dolly="0" wavelength="500" intensity="1" x="0" y="0" vx="1" vy="0"/>
+		<Emitter dolly="0" wavelength="550" intensity="1" x="0" y="0" vx="1" vy="0"/>
+		<Emitter dolly="0" wavelength="600" intensity="1" x="0" y="0" vx="1" vy="0"/>
+		<Emitter dolly="0" wavelength="650" intensity="1" x="0" y="0" vx="1" vy="0"/>
+		<Emitter dolly="0" wavelength="699" intensity="1" x="0" y="0" vx="1" vy="0"/>
+	</Emitters>
+
+	<Interactors>
+		<FlatLens dolly="8">
+			<LineSegment x1="-10" y1="-10" x2="0" y2="10" />
+			<LineSegment x1="0" y1="10" x2="10" y2="-10" />
+			<LineSegment x1="10" y1="-10" x2="-10" y2="-10" />
+		</FlatLens>
+		<FlatMirror dolly="10">
+			<LineSegment x1="-2" y1="-8" x2="-2" y2="8" />
+			<LineSegment x1="-2" y1="8" x2="2" y2="8" />
+			<LineSegment x1="2" y1="-8" x2="2" y2="8" />
+			<LineSegment x1="-2" y1="-8" x2="2" y2="-8" />
+		</FlatMirror>
+		<FlatLens dolly="9">
+			<LineSegment x1="-10" y1="-10" x2="0" y2="10" />
+			<LineSegment x1="0" y1="10" x2="10" y2="-10" />
+			<LineSegment x1="10" y1="-10" x2="-10" y2="-10" />
+		</FlatLens>
+	</Interactors>
+
+	<Receivers>
+		<Receiver dolly="7" radius="1">
+			<PowerReq wavelength="400" intensity="0.1"/>
+		</Receiver>
+		<Receiver dolly="6" radius="1">
+			<PowerReq wavelength="450" intensity="0.1"/>
+		</Receiver>
+		<Receiver dolly="5" radius="1">
+			<PowerReq wavelength="500" intensity="0.1"/>
+		</Receiver>
+		<Receiver dolly="4" radius="1">
+			<PowerReq wavelength="550" intensity="0.1"/>
+		</Receiver>
+		<Receiver dolly="3" radius="1">
+			<PowerReq wavelength="600" intensity="0.1"/>
+		</Receiver>
+		<Receiver dolly="2" radius="1">
+			<PowerReq wavelength="650" intensity="0.1"/>
+		</Receiver>
+		<Receiver dolly="1" radius="1">
+			<PowerReq wavelength="699" intensity="0.1"/>
+		</Receiver>
+	</Receivers>
+</Scene>

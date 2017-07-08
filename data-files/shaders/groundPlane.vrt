@@ -1,0 +1,18 @@
+#version 410
+
+layout(location = 0) in vec4 vert;
+layout(location = 1) in vec4 norm;
+layout(location = 2) in vec2 texCoord;
+
+out vec3 f_vert;
+out vec3 f_planeNorm;
+out vec2 f_texCoord;
+
+
+void main(void) {
+	gl_Position = g3d_ObjectToScreenMatrix * vert;
+	f_vert      = vert.xyz;
+	f_planeNorm = norm.xyz;
+	f_texCoord  = texCoord;
+
+}
