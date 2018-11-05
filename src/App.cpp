@@ -27,6 +27,7 @@ void App::onInit() {
   } else {
     activeCamera()->setFrame(CFrame::fromXYZYPRDegrees(  0.9f,   0.0f,  42.6f,   0.0f,  -0.0f,   0.0f));
   }
+  //cameraManipulator()->setEnabled(false);
   showRenderingStats = false;
 
   // shared_ptr< Texture >  groundTexture    = Texture::fromFile(RUSTY_DIAMOND_METAL_TEXTURE_FILENAME);
@@ -56,10 +57,6 @@ void App::onInit() {
 void App::onUserInput(UserInput *ui) {
   GApp::onUserInput(ui); // needed for widgets to advance (camera manipulators, GUIs)
   _laserEngine->onUserInput(ui, activeCamera());
-  // if (ui->keyDown(GKey::LEFT_MOUSE)) {
-  //  //  more like liberal propaganda mouse, amirite
-  //   }
-  // }
 
   if (ui->keyPressed(GKey('.'))){
     _laserEngine->loadLevel(_levels->nextLevel());
@@ -75,6 +72,18 @@ void App::onUserInput(UserInput *ui) {
 void App::onSimulation(RealTime rdt, SimTime sdt, SimTime idt) {
   GApp::onSimulation(rdt, sdt, idt); // need for widgets to advance (camera manipulators, GUIs)
   _laserEngine->onSimulation(rdt);
+}
+
+bool App::onEvent(const GEvent& event) {
+  if (DEBUG_ENABLED)
+  {
+    return false;
+  }
+  // in release mode only allow mouse interactions.
+  if ((event.type == GEventType::KEY_DOWN)) {
+    return true;
+  }
+  return false;
 }
 
 

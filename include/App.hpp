@@ -15,6 +15,7 @@ public:
   virtual void onInit() override;
 
   virtual void onUserInput(UserInput *ui) override;
+  virtual bool onEvent(const GEvent& e) override;
   virtual void onSimulation(RealTime rdt, SimTime sdt, SimTime idt) override;
 
   virtual void onGraphics3D(RenderDevice* rd, Array<shared_ptr<Surface> >& surface3D) override;

@@ -13,8 +13,9 @@ lasers are fun.
 Essential
 - Main Menu GUI
 - Next Level / To Main Menu GUI
-- Level Settings
 - More Levels
+- Rotation bounds visualized (Dolly)
+- disable camera movement
 
 Enhancement
 - Render interactors / receivers / emitters
@@ -22,6 +23,12 @@ Enhancement
 
 Excessive
 - Optimize rendering, save frame buffer. Display that unless something changes.
+- Clean up compile warnings
 
 Maybe a bug
 - Rotation max seems to be PI when it should be Tau
+
+##########################################################################################
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     DONE     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+##########################################################################################
+- Level Settings
